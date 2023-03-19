@@ -1,0 +1,82 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<ShoppingWeb.Models.Page>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách Page" + CurrentPage;
+    Layout = "~/Areas/admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-content">
+    <div class="page-header">
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+                <span class="breadcrumb-item active">Danh sách Page:page @CurrentPage</span>
+            </nav>
+        </div>
+    </div>
+    
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="row m-b-30">
+                <div class="col-lg-8"></div>
+                <div class="col-lg-4 text-right">
+                    <a asp-area="Admin" asp-controller="AdminPages" asp-action="Create" class="btn btn-primary"> <i class="anticon anticon-plus-circle m-r-5"></i>Add Page</a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover e-commerce-table">
+                    <thead>
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Page Name</th>
+                            <th>Trạng thái</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>@item.PageId</td>
+                                    <td>@item.PageName</td>
+                                    <td>@if(item.Published==true)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Public</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Non-Public</div>
+                                        </div>
+                                    }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary m-r-5" href="/admin/AdminPages/Details/@item.PageId">View</a>
+                                        <a class="btn btn-danger m-r-5" href="/admin/AdminPages/Delete/@item.PageId">Delete</a>
+                                        <a class="btn btn-secondary m-r-5" href="/admin/AdminPages/Edit/@item.PageId">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+                <div aria-label="Page navigation example">
+                    <ul>
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminPages" asp-action="Index" />
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

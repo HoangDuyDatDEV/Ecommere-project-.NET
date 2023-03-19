@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ShoppingWeb.Models.Account>
+
+@{
+    ViewData["Title"] = "Danh sách tài khoản quản trị";
+    Layout = "~/Areas/admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="main-content">
+    <div class="page-header">
+
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+
+                <span class="breadcrumb-item active">Danh sách tài khoản</span>
+            </nav>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">                      
+            <div class="row m-b-30">
+                <div class="col-lg-8">
+                    <div class="d-md-flex">
+                        <div class="m-b-10 m-r-15">
+                            <select id="idrole" name="idrole" class="custom-select" style="min-width: 250px;" asp-items="ViewBag.QuyenTruyCap">
+                                <Option value="0" disabled selected> Chọn quyền truy cập </Option>
+                            </select>
+                        </div>
+                        <div class="m-b-10">
+                            <select id="idstatus" name="idstatus" class="custom-select" style="min-width: 250px;" asp-items="ViewBag.lsTrangthai">
+                                <Option value="" disabled selected> Chọn trạng thái </Option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover e-commerce-table">
+                    <thead>
+                        <tr>
+
+                            <th>ID</th>
+                            <th> Họ Tên</th>
+                            <th>Email</th>
+                            <th>Điện thoại</th>
+                            <th>Quyền truy cập</th>
+                            <th>Trạng thái</th>
+                            <th>Lần đăng nhập cuối</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                    <td> @item.AccountId</td>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                            <h6 class="m-b-0 m-l-10">@item.FullName</h6>
+                                        </div>
+                                    </td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Role.Description</td>
+                                    <td>
+
+                                        @if (item.Active)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Active</div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <div>Block</div>
+                                            </div>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary m-r-5" href="/admin/AdminAccounts/Details/@item.AccountId">View</a>
+                                        <a class="btn btn-danger m-r-5" href="/admin/AdminAccounts/Delete/@item.AccountId">Delete</a>
+                                        <a class="btn btn-secondary m-r-5" href="/admin/AdminAccounts/Edit/@item.AccountId">Edit</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

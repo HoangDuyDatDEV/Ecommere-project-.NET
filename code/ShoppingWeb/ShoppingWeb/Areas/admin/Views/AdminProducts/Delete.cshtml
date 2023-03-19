@@ -1,0 +1,118 @@
+﻿@model ShoppingWeb.Models.Product
+
+@{
+    ViewData["Title"] = "Thông tin sản phẩm " + Model.ProductName;
+    Layout = "~/Areas/admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/Home/Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="/admin/AdminProducts/Index">Danh sách sản phẩm</a>
+            <span class="breadcrumb-item active">Thông tin sản phẩm</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin sản phẩm</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.ProductId</td>
+                    </tr>
+                    <tr>
+                        <td>Tên sản phẩm: </td>
+                        <td>@Model.ProductName	</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả ngắn:</td>
+                        <td>@Model.ShortDesc</td>
+                    </tr>
+                    <tr>
+                        <td>Giá bán:</td>
+                        <td>@Model.Price.Value.ToString("#,##0") VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Discount:</td>
+                        <td>@Model.Discount</td>
+                    </tr>
+                    <tr>
+                        <td>Danh mục:</td>
+                        <td>@Model.Cat.CatName</td>
+                    </tr>
+                    <tr>
+                        <td>Active:</td>
+                        <td>
+                            @Model.Active
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>HomeFlag:</td>
+                        <td>
+                            @Model.HomeFlag
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>BestSeller:</td>
+                        <td>
+                            @Model.BestSellers
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số lượng trong kho :</td>
+                        <td>@Model.UnitsInStock</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày tạo:</td>
+                        <td>@Model.DateCreated</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày chỉnh sửa:</td>
+                        <td>@Model.DateModified</td>
+                    </tr>
+                    <tr>
+                        <td>Tiêu đề:</td>
+                        <td>@Model.Title</td>
+                    </tr>
+                    <tr>
+                        <td>MetaDes:</td>
+                        <td>@Model.MetaDesc</td>
+                    </tr>
+                    <tr>
+                        <td>MetaKey:</td>
+                        <td>@Model.MetaKey</td>
+                    </tr>
+                    <tr>
+                        <td>Tags:</td>
+                        <td>@Model.Tags</td>
+                    </tr>
+                    <tr>
+                        <td>Ảnh sản phẩm:</td>
+                        <td>
+                            <img width="500" height="500" src="~Adminassets/images/products/@Model.Thumb" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả:</td>
+                        <td>@Model.Description</td>
+                    </tr>
+                    <tr>
+                        <td>Xác nhận xóa:</td>
+                        <td>
+                            <form asp-controller="AdminProducts" asp-action="Delete" asp-route-id="@Model.ProductId">
+                                <input type="hidden" asp-for="ProductId" />
+                                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                                <a asp-action="Index">Back to List</a>
+                            </form>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

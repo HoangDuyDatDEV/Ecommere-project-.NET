@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ShoppingWeb.Models.Role>
+
+@{
+    ViewData["Title"] = "Quản lý quyền truy cập";
+    Layout = "~/Areas/admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách quyền truy cập</span>
+        </nav>
+    </div>
+    <div class="row m-b-30">
+        <div class="col-lg-8"></div>
+        <div class="col-lg-4 text-right">
+            <a asp-area="Admin" asp-controller="AdminRoles" asp-action="Create" class="btn btn-primary"> <i class="anticon anticon-plus-circle m-r-5"></i>Add role</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Decription</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.RoleId</th>
+                            <td>@item.RoleName</td>
+                            <td>@item.Description</td>
+                            <td>
+                                <a class="btn btn-primary m-r-5" href="/admin/AdminRoles/Details/@item.RoleId">View</a>
+                                <a class="btn btn-danger m-r-5" href="/admin/AdminRoles/Delete/@item.RoleId">Delete</a>
+                                <a class="btn btn-secondary m-r-5" href="/admin/AdminRoles/Edit/@item.RoleId">Edit</a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
